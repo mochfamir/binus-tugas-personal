@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Car;
+use App\Models\Trainer;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $cars = Car::orderBy('updated_at', 'desc')->get();
+    $trainers = Trainer::orderBy('updated_at', 'desc')->get();
+
+
+    return view('welcome', ['cars' => $cars, 'trainers' => $trainers]);
 });
